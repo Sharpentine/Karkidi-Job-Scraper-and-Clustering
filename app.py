@@ -4,10 +4,14 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import time
+import re 
+
+
 def clean_skills_column(text):
     if pd.isna(text):
         return ''
-    return str(text).lower().replace('[^a-zA-Z0-9, ]', '', regex=True)
+    
+    return re.sub(r'[^a-zA-Z0-9, ]', '', str(text).lower())
 
 @st.cache_resource 
 def retrieve_model(filename='job_model.pkl'):
